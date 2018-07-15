@@ -11,13 +11,15 @@ function celsiusToFahrenheit(value)
 }
 
 // jQuery function
-$ ( document ).ready(function() {
+$ ( document ).ready(function() 
+{
   $input            = $('input');
   $inputFahrenheit  = $('.js-input-fahrenheit');
   $inputCelsius     = $('.js-input-celsius');
   $errorsDiv        = $('.js-errors');
 
-  $input.on('blur', function() {
+  $input.on('blur', function() 
+  {
     var value   = $(this).val();
     var type    = $(this).attr('data-unit');
 
@@ -28,13 +30,21 @@ $ ( document ).ready(function() {
     };
 
     // ensure input value is a number.
-    if ( $.isNumeric(value) ) {
+    if ( $.isNumeric(value) ) 
+    {
 
-      if ( type == 'fahrenheit' ) {
+      // Which input value are we working with ?
+      if ( type == 'fahrenheit' ) 
+      {
+        // Fahrenheit
+        // pass the value into our function, additionally calling the jQuery function to fetch the converted output of the other.
         var output = fahrenheitToCelsius(value);
         $('.js-input-celsius').val(output.toFixed(1));
       }
-      else {
+      else 
+      {
+        // Celsius
+        // pass the value into our function, additionally calling the jQuery function to fetch the converted output of the other.
         var output = celsiusToFahrenheit(value);       
         $('.js-input-fahrenheit').val(output.toFixed(1));
       };
@@ -42,7 +52,9 @@ $ ( document ).ready(function() {
       $errorsDiv.addClass('is-hidden');
       $errorsDiv.html("");
 
-    } else {
+    } 
+    else 
+    {
       
       $errorsDiv.removeClass('is-hidden');
       $errorsDiv.html("Inserted value was not a number, please try again with a valid input.");
