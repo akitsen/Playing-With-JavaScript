@@ -1,0 +1,61 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  color: #000000;
+}
+
+.page-header,
+.page-content,
+.page-footer {
+  margin: 0 auto;
+  text-align: center;
+  width: 600px;
+}
+
+.page-content {
+  margin: 100px auto;
+  max-width: 40rem;
+}
+
+
+input {
+  background: transparent;
+  border: 2px solid #668099;
+  font-size: 36px;
+  text-align: center;
+  width: 140px;
+  -moz-appearance:textfield;
+  -webkit-appearance: none;
+}
+
+input:focus {
+  border-bottom: 2px solid #DFBBB1;
+  outline: none;
+}
+
+label {
+  display: block;
+}
+
+.field-group {
+  display: inline-block;
+}
+
+.field-group + .field-group {
+  margin-left: 20px;
+}
+
+.errors {
+  color: #FB5012;
+  margin-top: 1.5rem;
+}
+
+.is-hidden {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
