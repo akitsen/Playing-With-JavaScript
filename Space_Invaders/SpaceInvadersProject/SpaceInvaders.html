@@ -1,0 +1,112 @@
+<HTML>
+
+<BODY bgcolor="#313131">
+	<div>
+		<table width="100%" height="100%" align="center" valign="center">
+			<tr>
+				<td>
+					<center>
+						<canvas id="mainCanvas" width="800" height="600" bgcolor="#000000" />
+					</center>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script>
+
+		canvas = document.getElementById('mainCanvas');
+		context = canvas.getContext('2d');
+
+		// call our various .png images.
+		var shipImage = new Image;
+		shipImage.src = "Ship.png";
+
+		var enemyImage = new Image;
+		enemyImage.src = "Enemy.png";
+
+		var bulletImage = new Image;
+		bulletImage.src = "Bullet.png";
+
+		function sprite(x, y, name) {
+			this.name = name;
+			this.x = x;
+			this.y = y;
+		}
+
+		var sprites = new Array(); // A list of sprites to store things like enemys and bullets
+		var shipPosition = 400; // The position horizontally of the ship
+		var updates = 0; // The number of times we have updated the screen. Useful for animations
+
+		// A loop to make our enemys
+		for (var s = 0; s < 10; s++) 
+		{
+			sprites[sprites.length] = new sprite((40 * s) + 166, 160, "enemy"); // First line of enemys added to our list of sprites
+			sprites[sprites.length] = new sprite((40 * s) + 166, 200, "enemy"); // Second line of enemys added to our list of sprites
+			sprites[sprites.length] = new sprite((40 * s) + 166, 240, "enemy"); // Third line of enemys added to our list of sprites
+			sprites[sprites.length] = new sprite((40 * s) + 166, 280, "enemy"); // Fourth line of enemys added to our list of sprites
+		}
+
+		// Our Drawing Function
+		function update() 
+		{
+			updates++;
+
+			// Clear the old stuff
+			context.clearRect(0, 0, mainCanvas.width, mainCanvas.height); 
+
+			for (var s = 0; s < sprites.length; s++) // Loop through all our sprites
+			{
+				if (sprites[s].name == "enemy") // The sprite is an enemy!
+				{
+					sprites[s].x += (Math.sin(updates / 10) * 5); // Move them back and forth with a Sine Wave
+					context.drawImage(enemyImage, sprites[s].x, sprites[s].y, enemyImage.width, enemyImage.height); // Draw the enemys
+				}
+
+				if (sprites[s].name == "bullet") // The sprite is a bullet!
+				{
+					sprites[s].y -= 12; // Make the bullet go up the screen
+
+					context.drawImage(bulletImage, sprites[s].x, sprites[s].y, bulletImage.width, bulletImage.height); // Draw the bullet
+
+					for (var e = 0; e < sprites.length; e++) // We need to loop through all the objects to see if the bullet has collided with anything
+					{
+						if (sprites[e].name == "enemy") // Only enemys can collide with bullets
+						{
+							// This says a bullet and enemy must be within 8 pixels
+							if ((Math.abs(sprites[s].x - sprites[e].x) < 16) && (Math.abs(sprites[s].y - sprites[e].y) < 8))  
+							{
+								sprites[e].y = -100; // Move the enemy off screen
+								sprites[s].y = -100; // Move the bullet off screen
+							}
+						}
+					}
+				}
+			}
+
+			context.drawImage(shipImage, shipPosition, 500, shipImage.width, shipImage.height); // Draw the ship
+		}
+
+		// How often to update (40ms is 30 times a second)
+		setInterval(update, 40); 
+
+		// various key strokes
+		function doKeyDown(evt) {
+			switch (evt.keyCode) {
+				case 32: // Space Key
+					sprites[sprites.length] = new sprite(shipPosition, 500, "bullet"); // Add a bullet to the ships location
+					break;
+				case 65: // A Key
+					shipPosition -= 4;
+					break;
+				case 68: // D Key
+					shipPosition += 4;
+					break;
+			}
+		}
+
+		// listen to events
+		window.addEventListener('keydown', doKeyDown, true); // Listen for keys
+	</script>
+</BODY>
+
+</HTML>
