@@ -14,7 +14,7 @@ Wanted to start with something simple and easy to get my feet wet.
 
 ### Project #2 : Space Invaders
 
-- [] Completed ?
+- [ ] Completed ?
 
 ---
 
@@ -22,7 +22,7 @@ Wanted to start with something simple and easy to get my feet wet.
 
 Credit to Jon Davis.
 
-- [] Completed ?
+- [ ] Completed ?
 
 ---
 
@@ -30,6 +30,6 @@ Credit to Jon Davis.
 
 Credit to Jon Davis.
 
-- [] Completed ?
+- [ ] Completed ?
 
 ---
